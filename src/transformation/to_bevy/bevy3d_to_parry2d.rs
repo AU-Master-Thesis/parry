@@ -4,8 +4,9 @@ use crate::{
 };
 #[cfg(feature = "bevy")]
 use bevy::math::primitives;
+use bevy::math::{Vec2, Vec3};
 
-// implement conversions form parry2d shape::Cuboid to bevy::math::primitives::Cuboid
+// implement conversions for bevy::math::primitives::Cuboid and parry2d shape::Cuboid
 #[cfg(feature = "dim2")]
 impl Into<shape::Cuboid> for primitives::Cuboid {
     fn into(self) -> shape::Cuboid {
@@ -14,7 +15,7 @@ impl Into<shape::Cuboid> for primitives::Cuboid {
     }
 }
 
-// implement conversions form parry3d shape::Cuboid to bevy::math::primitives::Cuboid
+// implement conversions for bevy::math::primitives::Cuboid and parry3d shape::Cuboid
 #[cfg(feature = "dim3")]
 impl Into<shape::Cuboid> for primitives::Cuboid {
     fn into(self) -> shape::Cuboid {
@@ -27,7 +28,21 @@ impl Into<shape::Cuboid> for primitives::Cuboid {
     }
 }
 
-// implement conversions form parry2d shape::Ball to bevy::math::primitives::Sphere
+#[cfg(feature = "dim3")]
+impl Into<primitives::Cuboid> for shape::Cuboid {
+    fn into(self) -> primitives::Cuboid {
+        let (x, y, z) = (
+            self.half_extents.x as f32,
+            self.half_extents.y as f32,
+            self.half_extents.z as f32,
+        );
+        primitives::Cuboid {
+            half_size: Vec3::new(x, y, z),
+        }
+    }
+}
+
+// implement conversions for bevy::math::primitives::Sphere and parry2d shape::Ball
 #[cfg(feature = "dim2")]
 impl Into<shape::Ball> for primitives::Sphere {
     fn into(self) -> shape::Ball {
@@ -35,7 +50,7 @@ impl Into<shape::Ball> for primitives::Sphere {
     }
 }
 
-// implement conversions form parry3d shape::Ball to bevy::math::primitives::Sphere
+// implement conversions for bevy::math::primitives::Sphere and parry3d shape::Ball
 #[cfg(feature = "dim3")]
 impl Into<shape::Ball> for primitives::Sphere {
     fn into(self) -> shape::Ball {
