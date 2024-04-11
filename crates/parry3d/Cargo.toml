@@ -17,7 +17,7 @@ edition = "2021"
 maintenance = { status = "actively-developed" }
 
 [features]
-default = ["required-features", "std"]
+default = ["required-features", "std", "bevy"]
 required-features = ["dim3", "f32"]
 std = ["nalgebra/std", "slab", "rustc-hash", "simba/std", "arrayvec/std", "spade"]
 dim3 = []
@@ -31,6 +31,7 @@ simd-nightly = ["simba/packed_simd", "simd-is-enabled"]
 enhanced-determinism = ["simba/libm_force", "indexmap"]
 cuda = ["cust_core", "cust", "nalgebra/cuda"]
 parallel = ["rayon"]
+# bevy = []
 
 # Do not enable this feature directly. It is automatically
 # enabled with the "simd-stable" or "simd-nightly" feature.
@@ -64,6 +65,7 @@ bytemuck = { version = "1", features = ["derive"], optional = true }
 
 [target.'cfg(not(target_os = "cuda"))'.dependencies]
 cust = { version = "0.3", optional = true }
+bevy = { version = "0.13", optional = true }
 
 [dev-dependencies]
 oorandom = "11"

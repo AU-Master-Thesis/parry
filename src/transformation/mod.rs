@@ -31,6 +31,8 @@ pub(crate) mod hertel_mehlhorn;
 pub use hertel_mehlhorn::{hertel_mehlhorn, hertel_mehlhorn_idx};
 #[cfg(feature = "dim3")]
 mod mesh_intersection;
+#[cfg(feature = "bevy")]
+pub mod to_bevy;
 #[cfg(feature = "dim3")]
 mod to_outline;
 #[cfg(feature = "dim2")]

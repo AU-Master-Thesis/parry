@@ -45,8 +45,8 @@ pub enum TopologyError {
 }
 
 #[cfg(feature = "std")]
-impl std::fmt::Display for TopologyError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl fmt::Display for TopologyError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::BadTriangle(fid) => {
                 f.pad(&format!("the triangle {fid} has at least two identical vertices."))
