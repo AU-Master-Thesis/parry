@@ -68,6 +68,9 @@ bytemuck = { version = "1", features = ["derive"], optional = true }
 cust = { version = "0.3", optional = true }
 bevy = { version = "0.13", optional = true }
 
+[target.'cfg(not(target_os = "bevy"))'.dependencies]
+bevy_more_shapes   = { git = "https://github.com/AU-Master-Thesis/bevy_more_shapes", branch = "bevy-v0.13.0" }
+
 [dev-dependencies]
 simba = { version = "0.8", default-features = false, features = ["partial_fixed_point_support"] }
 oorandom = "11"
